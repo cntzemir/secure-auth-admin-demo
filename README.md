@@ -73,17 +73,16 @@ The aim was to demonstrate that a web application can be designed with security 
 Add your final screenshots to the `screenshots/` folder and keep these filenames.
 
 ### Public and user views
-![Home](screenshots/home.png)
+![Home](screenshots/profile.png)
 ![Login](screenshots/login.png)
-![Register](screenshots/register.png)
-![User dashboard](screenshots/user-dashboard.png)
-![User activity](screenshots/user-activity.png)
+![User dashboard](screenshots/dashboard.png)
+![User activity](screenshots/activity.png)
 
 ### Admin views
-![Admin dashboard](screenshots/admin-dashboard.png)
-![Admin users](screenshots/admin-users.png)
+![Admin dashboard](screenshots/admin.png)
+![Admin users](screenshots/admin-user.png)
 ![Admin logs](screenshots/admin-logs.png)
-![Locked accounts](screenshots/locked-accounts.png)
+![Admin logs2](screenshots/admin-logs2.png)
 
 If you are uploading before screenshots are ready, you can temporarily keep this section and add the images later.
 
