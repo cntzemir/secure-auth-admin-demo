@@ -115,7 +115,6 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 
 ## Screenshots
 
-<<<<<<< HEAD
 ### Public and user views
 ![Home](screenshots/profile.png)
 ![Login](screenshots/login.png)
@@ -124,14 +123,13 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 
 ### Admin views
 ![Admin dashboard](screenshots/admin.png)
-![Admin users](screenshots/admin-user.png)
-![Admin logs](screenshots/admin-logs.png)
-![Admin logs2](screenshots/admin-logs2.png)
+![Admin users](screenshots/admin_user.png)
+![Admin logs](screenshots/admin_logs.png)
+![Admin logs2](screenshots/admin_logs2.png)
 =======
 > Place the screenshot files inside the repository’s `screenshots/` folder using the exact filenames referenced below.
 
 ### Login
->>>>>>> 775c94a (Polish README and final GitHub presentation)
 
 ![Login screen](screenshots/login.png)
 
