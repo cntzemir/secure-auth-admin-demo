@@ -4,7 +4,7 @@
   Security-focused authentication demo built with <strong>Node.js</strong>, <strong>Express</strong>, and <strong>EJS</strong>.
   <br/>
   Designed to demonstrate <strong>session-based auth</strong>, <strong>RBAC</strong>, <strong>audit logging</strong>,
-  <strong>CSRF protection</strong>, <strong>rate limiting</strong>, and <strong>account lockout</strong> inside a clean web application workflow.
+  <strong>custom CSRF protection</strong>, <strong>rate limiting</strong>, and <strong>account lockout</strong> inside a clean web application workflow.
 </p>
 
 <p align="center">
@@ -33,11 +33,12 @@ This project was built to show that a small web application can be designed with
 
 Instead of focusing only on forms and page flow, the application emphasizes:
 
-- **authentication** with session-based login and logout
+- **authentication** with registration, session-based login, and logout
 - **authorization** with backend-enforced role separation
 - **abuse reduction** with rate limiting and temporary lockout rules
 - **traceability** with audit logging and recent activity views
 - **defensive UX** with generic authentication errors and safe reset responses
+- **admin-side monitoring** with high-priority events, suspicious patterns, and filtered audit review
 
 It is positioned as a **defensive software engineering demo** rather than a production SaaS product.
 
@@ -48,7 +49,7 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 - It goes beyond a simple login/register CRUD flow
 - It demonstrates **security reasoning**, not only UI implementation
 - It separates **authentication** and **authorization** clearly
-- It includes **admin-side visibility** into auth events and suspicious patterns
+- It includes **admin-side visibility** into auth events, suspicious patterns, and locked accounts
 - It is documented like a project that was intentionally designed, not just coded quickly
 
 ---
@@ -76,9 +77,11 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 ### Abuse handling and visibility
 - Failed login tracking
 - Temporary account lockout after repeated failures
+- Dedicated `account_locked` audit event
 - Rate limiting on authentication routes
 - Audit trail with status, event type, route, IP, and notes
 - Quick filtering in the admin log view
+- High-priority and suspicious-event review on the admin dashboard
 
 ---
 
@@ -91,7 +94,7 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 | **Password hashing** | Stores passwords securely using `bcryptjs` |
 | **Rate limiting** | Reduces repeated login abuse on auth routes |
 | **Temporary lockout** | Locks accounts after repeated failed attempts |
-| **CSRF protection** | Protects state-changing forms from cross-site request forgery |
+| **Custom CSRF protection** | Protects state-changing forms, including logout and admin unlock actions |
 | **Server-side validation** | Validates auth form input on the backend |
 | **Generic auth errors** | Reduces credential enumeration signals |
 | **Audit logging** | Preserves visibility for auth and admin-relevant events |
@@ -177,7 +180,6 @@ This project intentionally treats authentication-related endpoints as high-value
 - **Password hashing:** `bcryptjs`
 - **Security headers:** `helmet`
 - **Rate limiting:** `express-rate-limit`
-- **CSRF:** `csurf`
 - **Persistence:** portable file-backed JSON store
 
 ---
@@ -243,7 +245,7 @@ You can change the seeded admin values through environment configuration before 
    - `/admin/users`
    - `/admin/logs`
    - `/admin/locked-accounts`
-6. Confirm that register, login, failure, logout, and admin review actions are reflected in the audit trail
+6. Confirm that register, login, failure, lockout, logout, and admin review actions are reflected in the audit trail
 
 ---
 

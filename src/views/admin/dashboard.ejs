@@ -9,6 +9,12 @@
     <article class="card stat-card"><h2><%= stats.failedLogins24h %></h2><p>Failed logins (24h)</p></article>
   </section>
 
+  <section class="grid three-up stats-grid compact-grid">
+    <article class="card stat-card"><h2><%= stats.suspiciousEvents24h %></h2><p>Suspicious events (24h)</p></article>
+    <article class="card stat-card"><h2><%= stats.deniedAccess24h %></h2><p>Denied access (24h)</p></article>
+    <article class="card stat-card"><h2><%= stats.repeatedFailures24h %></h2><p>Repeated failures (24h)</p></article>
+  </section>
+
   <section class="card">
     <h1>Admin overview</h1>
     <p class="muted">Use this panel to review authentication pressure, locked accounts, and recent security-relevant actions.</p>
@@ -20,8 +26,44 @@
   </section>
 
   <section class="card">
+    <h1>High-priority events</h1>
+    <p class="muted">These events deserve immediate review.</p>
+    <% if (!stats.highPriorityEvents.length) { %>
+      <p class="muted">No high-priority events in the last 24 hours.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Event</th>
+              <th>Status</th>
+              <th>Email</th>
+              <th>Route</th>
+              <th>Reason</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% stats.highPriorityEvents.forEach(item => { %>
+              <tr>
+                <td><span class="badge badge-severity-<%= item.severity %>"><%= item.severity %></span></td>
+                <td><%= item.event_type %></td>
+                <td><span class="badge badge-status-<%= item.event_status %>"><%= item.event_status %></span></td>
+                <td><%= item.email_snapshot || '-' %></td>
+                <td><%= item.route || '-' %></td>
+                <td><%= item.reason || item.note || '-' %></td>
+                <td><span class="mono-small"><%= item.created_at %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+
+  <section class="card">
     <h1>Recent security events</h1>
-    <p>Denied access attempts in the last 24h: <strong><%= stats.suspiciousEvents24h %></strong></p>
     <% if (!stats.recentEvents.length) { %>
       <p class="muted">No security events have been recorded yet.</p>
     <% } else { %>
@@ -29,20 +71,24 @@
         <table>
           <thead>
             <tr>
+              <th>Severity</th>
               <th>Event</th>
               <th>Status</th>
               <th>Email</th>
               <th>Route</th>
+              <th>Reason</th>
               <th>Time</th>
             </tr>
           </thead>
           <tbody>
             <% stats.recentEvents.forEach(item => { %>
               <tr>
+                <td><span class="badge badge-severity-<%= item.severity || 'info' %>"><%= item.severity || 'info' %></span></td>
                 <td><%= item.event_type %></td>
                 <td><span class="badge badge-status-<%= item.event_status %>"><%= item.event_status %></span></td>
                 <td><%= item.email_snapshot || '-' %></td>
                 <td><%= item.route || '-' %></td>
+                <td><%= item.reason || item.note || '-' %></td>
                 <td><span class="mono-small"><%= item.created_at %></span></td>
               </tr>
             <% }) %>

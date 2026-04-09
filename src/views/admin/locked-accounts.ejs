@@ -49,6 +49,7 @@
                 <td><%= user.remainingLabel %></td>
                 <td>
                   <form action="/admin/users/<%= user.id %>/unlock" method="POST" class="inline-form">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit" class="button button-small">Unlock</button>
                   </form>
                 </td>

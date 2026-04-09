@@ -68,6 +68,7 @@ function loginUser(input) {
     if (unlockDate > new Date()) {
       const error = new Error('Your account is temporarily locked. Please try again later.');
       error.userId = user.id;
+      error.code = 'ACCOUNT_CURRENTLY_LOCKED';
       throw error;
     }
     userService.clearLock(user.id);
@@ -82,6 +83,8 @@ function loginUser(input) {
         : 'Invalid credentials.'
     );
     error.userId = user.id;
+    error.code = updatedUser.is_locked ? 'ACCOUNT_LOCKED_TRIGGERED' : 'INVALID_CREDENTIALS';
+    error.user = updatedUser;
     throw error;
   }
 

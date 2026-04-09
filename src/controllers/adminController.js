@@ -45,10 +45,11 @@ function getSeverity(item) {
   const note = normalizeText(item.note).toLowerCase();
 
   if (status === 'denied') return 'high';
+  if (eventType === 'account_locked') return 'high';
   if (status === 'failure' && eventType === 'login') {
     return note.includes('locked') ? 'high' : 'medium';
   }
-  if (eventType.includes('unlock')) return 'low';
+  if (eventType.includes('unlock')) return 'medium';
   if (eventType.includes('logout')) return 'info';
   if (status === 'success') return 'low';
   return 'info';
@@ -56,7 +57,7 @@ function getSeverity(item) {
 
 function decorateLog(item) {
   const severity = getSeverity(item);
-  const reason = normalizeText(item.note) || '-';
+  const reason = normalizeText(item.reason || item.note) || '-';
   return {
     ...item,
     severity,
@@ -118,13 +119,18 @@ function getUserLogCounts(user, logs) {
 
 function renderAdminDashboard(req, res) {
   const rawStats = userService.getAdminStats() || {};
+  const securitySummary = auditService.getSecuritySummary(24) || {};
   const stats = {
     totalUsers: Number(rawStats.totalUsers || 0),
     totalAdmins: Number(rawStats.totalAdmins || 0),
     lockedAccounts: Number(rawStats.lockedAccounts || 0),
     failedLogins24h: Number(rawStats.failedLogins24h || 0),
-    suspiciousEvents24h: Number(rawStats.suspiciousEvents24h || 0),
-    recentEvents: toArray(rawStats.recentEvents)
+    suspiciousEvents24h: Number(securitySummary.suspiciousEvents24h || 0),
+    deniedAccess24h: Number(securitySummary.deniedAccess24h || 0),
+    repeatedFailures24h: Number(securitySummary.repeatedFailures24h || 0),
+    recentEvents: toArray(auditService.getRecentLogs(8)),
+    highPriorityEvents: toArray(securitySummary.highPriorityEvents),
+    suspiciousEvents: toArray(securitySummary.suspiciousEvents)
   };
 
   return res.render('admin/dashboard', {

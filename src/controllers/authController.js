@@ -75,9 +75,11 @@ function login(req, res) {
       ? 'Invalid credentials.'
       : error.message;
 
+    const attemptedEmail = req.validatedBody?.email || req.body.email || null;
+
     auditService.log({
       userId: error.userId || null,
-      emailSnapshot: req.validatedBody?.email || req.body.email || null,
+      emailSnapshot: attemptedEmail,
       eventType: 'login',
       eventStatus: 'failure',
       ipAddress: ip,
@@ -85,6 +87,20 @@ function login(req, res) {
       route: req.originalUrl,
       note: error.message
     });
+
+    if (error.code === 'ACCOUNT_LOCKED_TRIGGERED' && error.user) {
+      auditService.log({
+        userId: error.user.id,
+        emailSnapshot: error.user.email,
+        eventType: 'account_locked',
+        eventStatus: 'success',
+        ipAddress: ip,
+        userAgent,
+        route: req.originalUrl,
+        note: `Temporary lock applied after ${error.user.failed_login_count} failed login attempts.`
+      });
+    }
+
     req.session.flash = { type: 'error', message: userFacingMessage };
     return res.redirect('/login');
   }

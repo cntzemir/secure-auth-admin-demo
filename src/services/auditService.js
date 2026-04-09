@@ -90,6 +90,9 @@ function enrichLog(log, allLogs) {
   if (log.event_status === 'denied') {
     severity = 'high';
     reason = 'Unauthorized or denied access attempt';
+  } else if (log.event_type === 'account_locked') {
+    severity = 'high';
+    reason = 'Account lock triggered after repeated failed logins';
   } else if (log.event_type === 'login' && log.event_status === 'failure' && /temporarily locked/i.test(log.note || '')) {
     severity = 'high';
     reason = 'Account lock triggered after repeated failed logins';
@@ -99,12 +102,15 @@ function enrichLog(log, allLogs) {
   } else if (log.event_type === 'forgot_password_request' && resetBurst >= 3) {
     severity = 'medium';
     reason = 'Repeated password reset requests detected';
-  } else if (log.event_type === 'csrf_invalid') {
+  } else if (log.event_type === 'csrf_validation' || log.event_type === 'csrf_invalid') {
     severity = 'high';
     reason = 'Invalid or missing CSRF token';
   } else if (log.event_type === 'admin_unlock_user') {
     severity = 'medium';
     reason = 'Privileged account state change';
+  } else if (log.event_type === 'register') {
+    severity = 'low';
+    reason = 'New account registration';
   } else if (log.event_type === 'login' && log.event_status === 'success') {
     severity = 'low';
     reason = 'Successful login';
