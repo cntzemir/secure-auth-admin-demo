@@ -137,7 +137,9 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 | --- | --- |
 | ![Admin logs](./screenshots/admin_logs.png) | ![Filtered audit logs](./screenshots/admin_log_v2.png) |
 
-> Add extra screenshots such as `register.png` and `locked_accounts.png` later if you want the visual coverage to match the full demo flow.
+| Register | Suspicious events example |
+| --- | --- |
+| ![Admin logs](./screenshots/register.png) | ![Filtered audit logs](./screenshots/suspicious_events.png) |
 
 ---
 
