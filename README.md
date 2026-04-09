@@ -3,8 +3,9 @@
 <p align="center">
   Security-focused authentication demo built with <strong>Node.js</strong>, <strong>Express</strong>, and <strong>EJS</strong>.
   <br/>
-  Designed to demonstrate <strong>session-based auth</strong>, <strong>RBAC</strong>, <strong>audit logging</strong>,
-  <strong>custom CSRF protection</strong>, <strong>rate limiting</strong>, and <strong>account lockout</strong> inside a clean web application workflow.
+  Designed to demonstrate <strong>session-based authentication</strong>, <strong>RBAC</strong>, <strong>audit logging</strong>,
+  <strong>CSRF protection</strong>, <strong>rate limiting</strong>, and <strong>temporary account lockout</strong>
+  inside a clean web application workflow.
 </p>
 
 <p align="center">
@@ -18,6 +19,7 @@
 
 <p align="center">
   <a href="#project-overview">Overview</a> •
+  <a href="#why-this-project-stands-out">Why It Stands Out</a> •
   <a href="#feature-set">Features</a> •
   <a href="#security-controls">Security Controls</a> •
   <a href="#screenshots">Screenshots</a> •
@@ -29,7 +31,7 @@
 
 ## Project overview
 
-This project was built to show that a small web application can be designed with **security-aware decisions from the start**, not added as an afterthought later.
+This project was built to show that a small web application can be designed with **security-aware decisions from the start**, not added later as an afterthought.
 
 Instead of focusing only on forms and page flow, the application emphasizes:
 
@@ -38,7 +40,7 @@ Instead of focusing only on forms and page flow, the application emphasizes:
 - **abuse reduction** with rate limiting and temporary lockout rules
 - **traceability** with audit logging and recent activity views
 - **defensive UX** with generic authentication errors and safe reset responses
-- **admin-side monitoring** with high-priority events, suspicious patterns, and filtered audit review
+- **admin-side monitoring** with suspicious patterns, filtered audit review, and lock visibility
 
 It is positioned as a **defensive software engineering demo** rather than a production SaaS product.
 
@@ -94,7 +96,7 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 | **Password hashing** | Stores passwords securely using `bcryptjs` |
 | **Rate limiting** | Reduces repeated login abuse on auth routes |
 | **Temporary lockout** | Locks accounts after repeated failed attempts |
-| **Custom CSRF protection** | Protects state-changing forms, including logout and admin unlock actions |
+| **CSRF protection** | Protects state-changing forms, including logout and admin unlock actions |
 | **Server-side validation** | Validates auth form input on the backend |
 | **Generic auth errors** | Reduces credential enumeration signals |
 | **Audit logging** | Preserves visibility for auth and admin-relevant events |
@@ -116,44 +118,26 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 ## Screenshots
 
 ### Public and user views
-![Home](screenshots/profile.png)
-![Login](screenshots/login.png)
-![User dashboard](screenshots/dashboard.png)
-![User activity](screenshots/activity.png)
 
-### Admin views
-![Admin dashboard](screenshots/admin.png)
-![Admin users](screenshots/admin_user.png)
-![Admin logs](screenshots/admin_logs.png)
-![Admin logs2](screenshots/admin_logs2.png)
-=======
-> Place the screenshot files inside the repository’s `screenshots/` folder using the exact filenames referenced below.
-
-### Login
-
-![Login screen](screenshots/login.png)
-
-### User views
-
-| Profile | Recent activity |
+| Login | Profile |
 | --- | --- |
-| ![Profile](screenshots/profile.png) | ![Recent activity](screenshots/activity.png) |
+| ![Login screen](./screenshots/login.png) | ![Profile](./screenshots/profile.png) |
 
-### Dashboard views
-
-| User/Admin dashboard | Admin overview |
+| User dashboard | Recent activity |
 | --- | --- |
-| ![Dashboard](screenshots/dashboard.png) | ![Admin overview](screenshots/admin.png) |
+| ![Dashboard](./screenshots/dashboard.png) | ![Recent activity](./screenshots/activity.png) |
 
 ### Admin monitoring views
 
-| Users view | Audit logs |
+| Admin overview | Users view |
 | --- | --- |
-| ![Admin users](screenshots/admin_user.png) | ![Admin logs](screenshots/admin_logs.png) |
+| ![Admin overview](./screenshots/admin.png) | ![Admin users](./screenshots/admin_user.png) |
 
-### Filtered audit example
+| Audit logs | Filtered audit example |
+| --- | --- |
+| ![Admin logs](./screenshots/admin_logs.png) | ![Filtered audit logs](./screenshots/admin_log_v2.png) |
 
-![Filtered audit logs](screenshots/admin_log_v2.png)
+> Add extra screenshots such as `register.png` and `locked_accounts.png` later if you want the visual coverage to match the full demo flow.
 
 ---
 
@@ -228,7 +212,7 @@ Open: `http://localhost:3000`
 - **Email:** `admin@example.com`
 - **Password:** `Admin123!`
 
-You can change the seeded admin values through environment configuration before using the project beyond local testing.
+This is a **seeded local demo account** for local testing only.
 
 ---
 
