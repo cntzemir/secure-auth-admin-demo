@@ -1,17 +1,11 @@
-# Changed files - v8 final patch
+Changed files in this patch:
+- README.md
+- CHANGELOG.md
+- docs/screenshots-checklist.md
+- docs/github-release-checklist.md
 
-## Updated
-- `README.md`
-  - final GitHub-facing README polish
-  - added screenshot embed section
-  - added GitHub upload checklist
-- `CHANGELOG.md`
-  - added v0.8.0 final release notes
-- `.gitignore`
-  - expanded ignore rules so runtime data files do not get committed
-- `docs/screenshots-checklist.md`
-  - aligned screenshot filenames with README image paths
-
-## New
-- `docs/github-release-checklist.md`
-  - final pre-push checklist for publishing the repository safely
+What changed:
+- Replaced the README with a polished GitHub-facing version
+- Embedded the provided screenshot filenames directly into the README
+- Added a precise screenshot file checklist
+- Added a final repository release checklist

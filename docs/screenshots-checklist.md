@@ -1,23 +1,26 @@
-# Screenshots Checklist
+# Screenshots checklist
 
-Capture these after the UI is stable and test data exists.
+Place these files in the repository root under `screenshots/` using the exact filenames below.
 
-## Recommended GitHub screenshots
-Use these exact filenames so the README works without edits:
-- [ ] `screenshots/home.png`
-- [ ] `screenshots/login.png`
-- [ ] `screenshots/register.png`
-- [ ] `screenshots/user-dashboard.png`
-- [ ] `screenshots/user-activity.png`
-- [ ] `screenshots/admin-dashboard.png`
-- [ ] `screenshots/admin-users.png`
-- [ ] `screenshots/admin-logs.png`
-- [ ] `screenshots/locked-accounts.png`
+## Required files currently used in README
+- `screenshots/login.png`
+- `screenshots/profile.png`
+- `screenshots/activity.png`
+- `screenshots/dashboard.png`
+- `screenshots/admin.png`
+- `screenshots/admin_user.png`
+- `screenshots/admin_logs.png`
+- `screenshots/admin_log_v2.png`
 
-## Screenshot tips
-- Use realistic but safe demo data.
-- Avoid exposing secrets or raw environment variables.
-- Prefer full-page screenshots over tiny cropped snippets.
-- Keep browser zoom and spacing consistent.
-- Capture at least one admin view that clearly shows security-oriented data such as failed logins or audit events.
-- Log out and back in if you need cleaner demo data before capturing the final set.
+## Optional additions for later polish
+- `screenshots/register.png`
+- `screenshots/forgot-password.png`
+- `screenshots/locked-accounts.png`
+- `screenshots/home.png`
+
+## Capture guidance
+- Use the dark theme consistently
+- Keep browser zoom and page width consistent between screenshots
+- Prefer clean states over cluttered ones
+- Keep sensitive local paths, browser bookmarks, and unrelated tabs out of view
+- Use realistic but non-sensitive demo content only
