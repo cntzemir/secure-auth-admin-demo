@@ -1,0 +1,30 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container narrow">
+  <section class="card">
+    <h1>Create account</h1>
+    <form action="/register" method="POST" class="form-grid">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>
+        Full name
+        <input type="text" name="fullName" required minlength="2">
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required minlength="8">
+      </label>
+      <label>
+        Confirm password
+        <input type="password" name="confirmPassword" required minlength="8">
+      </label>
+      <button type="submit" class="button">Register</button>
+    </form>
+    <p class="muted">Use at least 8 characters including uppercase, lowercase, and a number.</p>
+  </section>
+</main>
+<%- include('../partials/footer') %>

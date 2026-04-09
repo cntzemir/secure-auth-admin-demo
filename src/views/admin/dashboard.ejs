@@ -1,0 +1,55 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container">
+  <section class="grid four-up stats-grid">
+    <article class="card stat-card"><h2><%= stats.totalUsers %></h2><p>Total users</p></article>
+    <article class="card stat-card"><h2><%= stats.totalAdmins %></h2><p>Admins</p></article>
+    <article class="card stat-card"><h2><%= stats.lockedAccounts %></h2><p>Locked accounts</p></article>
+    <article class="card stat-card"><h2><%= stats.failedLogins24h %></h2><p>Failed logins (24h)</p></article>
+  </section>
+
+  <section class="card">
+    <h1>Admin overview</h1>
+    <p class="muted">Use this panel to review authentication pressure, locked accounts, and recent security-relevant actions.</p>
+    <div class="button-row">
+      <a href="/admin/users" class="button button-secondary">Review users</a>
+      <a href="/admin/locked-accounts" class="button button-secondary">Check locked accounts</a>
+      <a href="/admin/logs" class="button button-secondary">Open audit logs</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h1>Recent security events</h1>
+    <p>Denied access attempts in the last 24h: <strong><%= stats.suspiciousEvents24h %></strong></p>
+    <% if (!stats.recentEvents.length) { %>
+      <p class="muted">No security events have been recorded yet.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Status</th>
+              <th>Email</th>
+              <th>Route</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% stats.recentEvents.forEach(item => { %>
+              <tr>
+                <td><%= item.event_type %></td>
+                <td><span class="badge badge-status-<%= item.event_status %>"><%= item.event_status %></span></td>
+                <td><%= item.email_snapshot || '-' %></td>
+                <td><%= item.route || '-' %></td>
+                <td><span class="mono-small"><%= item.created_at %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

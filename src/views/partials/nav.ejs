@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="/" class="brand">Secure Auth Demo</a>
+    <nav>
+      <% if (!currentUser) { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/forgot-password">Forgot Password</a>
+      <% } else { %>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/activity">Activity</a>
+        <% if (currentUser.role === 'admin') { %>
+          <a href="/admin">Admin</a>
+        <% } %>
+        <form action="/logout" method="POST" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-button">Logout</button>
+        </form>
+      <% } %>
+    </nav>
+  </div>
+</header>

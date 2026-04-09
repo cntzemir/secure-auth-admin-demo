@@ -1,0 +1,22 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container narrow">
+  <section class="card">
+    <h1>Login</h1>
+    <form action="/login" method="POST" class="form-grid">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit" class="button">Login</button>
+    </form>
+    <p class="muted">Demo admin after seeding: admin@example.com / Admin123!</p>
+  </section>
+</main>
+<%- include('../partials/footer') %>

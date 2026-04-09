@@ -1,0 +1,63 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container">
+  <section class="grid four-up stats-grid">
+    <article class="card stat-card"><h2><%= summary.totalLocked %></h2><p>Total locked</p></article>
+    <article class="card stat-card"><h2><%= summary.activeLocks %></h2><p>Active locks</p></article>
+    <article class="card stat-card"><h2><%= summary.expiredLocks %></h2><p>Expired locks</p></article>
+    <article class="card stat-card"><h2><%= summary.highestFailedCount %></h2><p>Peak failed logins</p></article>
+  </section>
+
+  <section class="card">
+    <h1>Locked accounts</h1>
+    <p class="muted">These are accounts that hit the current failed-login threshold and may require manual review or unlock.</p>
+
+    <% if (!users.length) { %>
+      <div class="empty-state">
+        <h2>No locked accounts right now</h2>
+        <p class="muted">That means there are currently no users blocked by the temporary lock policy.</p>
+        <div class="button-row">
+          <a href="/admin" class="button button-secondary">Back to admin overview</a>
+          <a href="/admin/logs" class="button button-secondary">Review audit logs</a>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Failed logins</th>
+              <th>Risk</th>
+              <th>Lock state</th>
+              <th>Lock until</th>
+              <th>Remaining</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+              <tr>
+                <td><strong><%= user.full_name %></strong></td>
+                <td><%= user.email %></td>
+                <td><%= user.failed_login_count %></td>
+                <td><span class="badge badge-risk-<%= user.riskLevel %>"><%= user.riskLevel %></span></td>
+                <td><span class="badge badge-status-<%= user.lockState %>"><%= user.lockState %></span></td>
+                <td><span class="mono-small"><%= user.lockUntilLabel %></span></td>
+                <td><%= user.remainingLabel %></td>
+                <td>
+                  <form action="/admin/users/<%= user.id %>/unlock" method="POST" class="inline-form">
+                    <button type="submit" class="button button-small">Unlock</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

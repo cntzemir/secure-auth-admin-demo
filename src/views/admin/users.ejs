@@ -1,0 +1,65 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<%
+  const safeUsers = Array.isArray(users) ? users : [];
+  const safeSummary = summary || { totalUsers: 0, admins: 0, locked: 0, reviewNeeded: 0 };
+%>
+<main class="container">
+  <section class="grid four-up stats-grid">
+    <article class="card stat-card"><h2><%= safeSummary.totalUsers %></h2><p>Total users</p></article>
+    <article class="card stat-card"><h2><%= safeSummary.admins %></h2><p>Admins</p></article>
+    <article class="card stat-card"><h2><%= safeSummary.locked %></h2><p>Locked accounts</p></article>
+    <article class="card stat-card"><h2><%= safeSummary.reviewNeeded %></h2><p>Need review</p></article>
+  </section>
+
+  <section class="card">
+    <h1>Users</h1>
+    <p class="muted">Review account pressure, lock state, and accounts that may need manual attention.</p>
+
+    <% if (!safeUsers.length) { %>
+      <div class="empty-state">
+        <p class="muted center-text">No users found.</p>
+      </div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Failed logins</th>
+              <th>Risk</th>
+              <th>Lock state</th>
+              <th>Lock until</th>
+              <th>Remaining</th>
+              <th>Signals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% safeUsers.forEach(user => { %>
+              <tr>
+                <td><strong><%= user.full_name %></strong></td>
+                <td><%= user.email %></td>
+                <td><span class="badge"><%= user.role %></span></td>
+                <td><%= user.failed_login_count || 0 %></td>
+                <td><span class="badge badge-risk-<%= user.riskLevel || 'minimal' %>"><%= user.riskLevel || 'minimal' %></span></td>
+                <td><span class="badge badge-status-<%= user.lockState || 'not_set' %>"><%= user.lockState || 'not_set' %></span></td>
+                <td><span class="mono-small"><%= user.lockUntilLabel || '-' %></span></td>
+                <td><%= user.remainingLabel || '-' %></td>
+                <td>
+                  <div class="signal-stack">
+                    <span class="badge">suspicious: <%= user.suspiciousCount || 0 %></span>
+                    <span class="badge">denied: <%= user.deniedCount || 0 %></span>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

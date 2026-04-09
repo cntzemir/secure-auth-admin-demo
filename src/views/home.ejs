@@ -1,0 +1,36 @@
+<%- include('partials/head', { title }) %>
+<%- include('partials/nav') %>
+<%- include('partials/flash') %>
+<main class="container">
+  <section class="hero card">
+    <h1>Secure Auth & Admin Panel Demo</h1>
+    <p>
+      A small but structured project focused on secure authentication, role-based access control,
+      failed login tracking, and audit visibility.
+    </p>
+    <div class="button-row">
+      <% if (!currentUser) { %>
+        <a href="/register" class="button">Create account</a>
+        <a href="/login" class="button button-secondary">Log in</a>
+      <% } else { %>
+        <a href="/dashboard" class="button">Go to dashboard</a>
+      <% } %>
+    </div>
+  </section>
+
+  <section class="grid three-up">
+    <article class="card">
+      <h2>Authentication</h2>
+      <p>Registration, login, logout, secure password hashing, and session-based identity.</p>
+    </article>
+    <article class="card">
+      <h2>Authorization</h2>
+      <p>Backend-enforced role separation between regular users and administrators.</p>
+    </article>
+    <article class="card">
+      <h2>Monitoring</h2>
+      <p>Audit events, failed login visibility, and locked account management.</p>
+    </article>
+  </section>
+</main>
+<%- include('partials/footer') %>

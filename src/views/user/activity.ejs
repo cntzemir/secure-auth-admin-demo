@@ -1,0 +1,39 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container">
+  <section class="card">
+    <h1>Your recent activity</h1>
+    <% if (!activity.length) { %>
+      <p>No activity yet.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Status</th>
+              <th>IP</th>
+              <th>Route</th>
+              <th>Note</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% activity.forEach(item => { %>
+              <tr>
+                <td><%= item.event_type %></td>
+                <td><span class="badge"><%= item.event_status %></span></td>
+                <td><%= item.ip_address || '-' %></td>
+                <td><%= item.route || '-' %></td>
+                <td><%= item.note || '-' %></td>
+                <td><%= item.created_at %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

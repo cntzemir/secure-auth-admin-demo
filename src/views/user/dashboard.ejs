@@ -1,0 +1,41 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container">
+  <section class="card">
+    <h1>Welcome, <%= dashboardData.profile.full_name %></h1>
+    <p>Your role: <strong><%= dashboardData.profile.role %></strong></p>
+    <p>Last login: <%= dashboardData.profile.last_login_at || 'No previous successful login recorded yet.' %></p>
+  </section>
+
+  <section class="card">
+    <h2>Recent activity</h2>
+    <% if (!dashboardData.recentActivity.length) { %>
+      <p>No activity recorded yet.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Status</th>
+              <th>Route</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% dashboardData.recentActivity.forEach(item => { %>
+              <tr>
+                <td><%= item.event_type %></td>
+                <td><span class="badge"><%= item.event_status %></span></td>
+                <td><%= item.route || '-' %></td>
+                <td><%= item.created_at %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

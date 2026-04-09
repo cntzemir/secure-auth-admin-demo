@@ -1,0 +1,100 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<%
+  const safeFilters = filters || { eventType: '', status: '', severity: '', search: '' };
+  const safeOptions = filterOptions || { eventTypes: [], statuses: [], severities: ['high', 'medium', 'low', 'info'] };
+  const safeLogs = Array.isArray(logs) ? logs : [];
+%>
+<main class="container">
+  <section class="card">
+    <h1>Audit logs</h1>
+    <p class="muted">Filter recent authentication and admin events to review abuse signals and unusual access patterns.</p>
+
+    <form method="GET" action="/admin/logs" class="filter-grid">
+      <label>
+        Event
+        <select name="eventType">
+          <option value="">All</option>
+          <% safeOptions.eventTypes.forEach(item => { %>
+            <option value="<%= item %>" <%= safeFilters.eventType === item ? 'selected' : '' %>><%= item %></option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>
+        Status
+        <select name="status">
+          <option value="">All</option>
+          <% safeOptions.statuses.forEach(item => { %>
+            <option value="<%= item %>" <%= safeFilters.status === item ? 'selected' : '' %>><%= item %></option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>
+        Severity
+        <select name="severity">
+          <option value="">All</option>
+          <% safeOptions.severities.forEach(item => { %>
+            <option value="<%= item %>" <%= safeFilters.severity === item ? 'selected' : '' %>><%= item %></option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>
+        Search
+        <input type="text" name="search" value="<%= safeFilters.search || '' %>" placeholder="email, route, note...">
+      </label>
+
+      <div class="button-row">
+        <button type="submit">Apply filters</button>
+        <a href="/admin/logs" class="button button-secondary">Reset</a>
+      </div>
+    </form>
+
+    <div class="button-row quick-filters-row">
+      <a href="/admin/logs?severity=high" class="button button-secondary">High severity</a>
+      <a href="/admin/logs?status=denied" class="button button-secondary">Denied events</a>
+      <a href="/admin/logs?eventType=login&status=failure" class="button button-secondary">Failed logins</a>
+    </div>
+
+    <% if (!safeLogs.length) { %>
+      <div class="empty-state">
+        <p class="muted center-text">No logs matched the current filters.</p>
+      </div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Event</th>
+              <th>Status</th>
+              <th>Email</th>
+              <th>IP</th>
+              <th>Route</th>
+              <th>Reason</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% safeLogs.forEach(item => { %>
+              <tr>
+                <td><span class="badge badge-severity-<%= item.severity || 'info' %>"><%= item.severity || 'info' %></span></td>
+                <td><%= item.event_type %></td>
+                <td><span class="badge badge-status-<%= item.event_status %>"><%= item.event_status %></span></td>
+                <td><%= item.email_snapshot || '-' %></td>
+                <td><%= item.ip_address || '-' %></td>
+                <td><%= item.route || '-' %></td>
+                <td><%= item.reason || item.note || '-' %></td>
+                <td><span class="mono-small"><%= item.created_at %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

@@ -1,0 +1,17 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/nav') %>
+<%- include('../partials/flash') %>
+<main class="container narrow">
+  <section class="card">
+    <h1>Profile</h1>
+    <dl class="detail-list">
+      <div><dt>Full name</dt><dd><%= profile.full_name %></dd></div>
+      <div><dt>Email</dt><dd><%= profile.email %></dd></div>
+      <div><dt>Role</dt><dd><%= profile.role %></dd></div>
+      <div><dt>Account created</dt><dd><%= profile.created_at %></dd></div>
+      <div><dt>Last login</dt><dd><%= profile.last_login_at || 'No successful login yet.' %></dd></div>
+      <div><dt>Failed login count</dt><dd><%= profile.failed_login_count %></dd></div>
+    </dl>
+  </section>
+</main>
+<%- include('../partials/footer') %>
