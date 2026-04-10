@@ -247,14 +247,14 @@ This is a **seeded local demo account** for local testing only.
 
 ---
 
-## Future improvements
+## Next version goals
 
-- Move persistence to SQLite or PostgreSQL
-- Add richer suspicious-behavior scoring
-- Add more advanced log filtering and export
-- Add MFA
-- Add email verification
-- Add stronger admin account management actions
+- move persistence from the JSON-backed store to SQLite or PostgreSQL
+- add stronger suspicious-event scoring and filtered export
+- introduce MFA or TOTP-based second-factor support
+- expand admin tooling for account recovery and unlock review
+- add integration tests for auth, lockout, and audit visibility
+- improve reviewer demo data and reset tooling
 
 ---
 
