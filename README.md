@@ -119,28 +119,19 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 
 ### Public and user views
 
-| Login | Profile |
+| Login | User dashboard |
 | --- | --- |
-| ![Login screen](./screenshots/login.png) | ![Profile](./screenshots/profile.png) |
-
-| User dashboard | Recent activity |
-| --- | --- |
-| ![Dashboard](./screenshots/dashboard.png) | ![Recent activity](./screenshots/activity.png) |
+| ![Login screen](./screenshots/login.png) | ![Dashboard](./screenshots/dashboard.png) |
 
 ### Admin monitoring views
 
-| Admin overview | Users view |
+| Admin overview | Recent activity |
 | --- | --- |
-| ![Admin overview](./screenshots/admin.png) | ![Admin users](./screenshots/admin_user.png) |
+| ![Admin overview](./screenshots/admin.png) | ![Recent activity](./screenshots/activity.png) |
 
-| Audit logs | Filtered audit example |
+| Audit logs | Suspicious events example |
 | --- | --- |
-| ![Admin logs](./screenshots/admin_logs.png) | ![Filtered audit logs](./screenshots/admin_log_v2.png) |
-
-| Register | Suspicious events example |
-| --- | --- |
-| ![Admin logs](./screenshots/register.png) | ![Filtered audit logs](./screenshots/suspicious_events.png) |
-
+| ![Admin logs](./screenshots/admin_logs.png) | ![Filtered audit logs](./screenshots/suspicious_events.png) |
 ---
 
 ## Request / response mindset
