@@ -16,7 +16,7 @@ If you notice a security issue or a weakness in the implementation, please **do 
 
 Instead, report it privately by email:
 
-**emirrcanitez@icloud.com**
+**canitezemirr@gmail.com**
 
 Please include:
 - a short description of the issue
