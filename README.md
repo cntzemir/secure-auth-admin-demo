@@ -46,6 +46,14 @@ It is positioned as a **defensive software engineering demo** rather than a prod
 
 ---
 
+## Why this project matters
+
+Many student auth demos stop at basic login and role checks. This project is designed to show a more defensive approach: backend-enforced authorization, abuse reduction, audit visibility, and predictable handling of security-sensitive actions.
+
+The goal is not just to authenticate users, but to make authentication-related behavior reviewable, traceable, and safer under misuse scenarios.
+
+---
+
 ## Why this project stands out
 
 - It goes beyond a simple login/register CRUD flow
