@@ -287,3 +287,5 @@ This is a **seeded local demo account** for local testing only.
 - [ ] README images render correctly on GitHub
 - [ ] register, login, logout, lockout, and admin views are tested once more
 - [ ] repo About section and topics are filled in on GitHub
+
+docs: add reviewer summary near top of README
