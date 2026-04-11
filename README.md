@@ -64,6 +64,17 @@ The goal is not just to authenticate users, but to make authentication-related b
 
 ---
 
+## Architecture at a glance
+
+Browser
+  -> Express routes
+  -> auth / middleware / validation
+  -> controllers / services
+  -> session store / JSON data store
+  -> admin monitoring views / audit log
+
+---
+
 ## Feature set
 
 ### Authentication flows
@@ -112,6 +123,8 @@ The goal is not just to authenticate users, but to make authentication-related b
 ---
 
 ## Threats considered
+
+This demo keeps authentication, authorization, validation, and audit visibility as separate concerns so that reviewer-facing security decisions stay easy to inspect.
 
 - Brute-force login attempts
 - Credential guessing and repeated auth abuse
